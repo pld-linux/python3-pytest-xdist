@@ -1,8 +1,9 @@
 #
 # Conditional build:
-%bcond_without	python2 # CPython 2.x module
-%bcond_without	python3 # CPython 3.x module
-%bcond_with	tests	# tests [requiring source code of some modules, sensitive to pytest warnings or other output changes]
+%bcond_without	python2		# CPython 2.x module
+%bcond_without	python3		# CPython 3.x module
+%bcond_without	tests		# tests [sensitive to pytest warnings or other output changes]
+%bcond_with	tests_py2	# tests with Python 2 [requiring source code of some modules + the above]
 
 Summary:	py.test distributed testing plugin
 Summary(pl.UTF-8):	Wtyczka py.test do testów rozproszonych
@@ -20,11 +21,12 @@ URL:		https://github.com/pytest-dev/pytest-xdist
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
 BuildRequires:	python-setuptools_scm
-%if %{with tests}
+%if %{with tests_py2}
 BuildRequires:	python-execnet >= 1.1
 BuildRequires:	python-pexpect >= 3
 BuildRequires:	python-py >= 1.4.22
 BuildRequires:	python-pytest >= 2.4.2
+BuildConflicts:	python-pytest-capturelog
 %endif
 %endif
 %if %{with python3}
@@ -36,6 +38,7 @@ BuildRequires:	python3-execnet >= 1.1
 BuildRequires:	python3-pexpect >= 3
 BuildRequires:	python3-py >= 1.4.22
 BuildRequires:	python3-pytest >= 2.4.2
+BuildConflicts:	python-pytest-capturelog
 %endif
 %endif
 BuildRequires:	rpm-pythonprov
@@ -74,7 +77,7 @@ trybów wykonywania testów, jak choćby zrównoleglenie.
 %if %{with python2}
 %py_build
 
-%if %{with tests}
+%if %{with tests_py2}
 PYTHONPATH=$(pwd) %{__python} -m pytest testing
 %endif
 %endif
