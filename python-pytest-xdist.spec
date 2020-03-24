@@ -3,29 +3,27 @@
 %bcond_without	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
 %bcond_without	tests		# tests [sensitive to pytest warnings or other output changes]
-%bcond_with	tests_py2	# tests with Python 2 [requiring source code of some modules + the above]
 
 Summary:	py.test distributed testing plugin
 Summary(pl.UTF-8):	Wtyczka py.test do testów rozproszonych
 Name:		python-pytest-xdist
-Version:	1.24.1
-Release:	2
+Version:	1.27.0
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-xdist/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytest-xdist/pytest-xdist-%{version}.tar.gz
-# Source0-md5:	ddc75561ff46a89ef7e222e8353b2925
+# Source0-md5:	0ebb8651f080495ad781d1cf4577693a
 URL:		https://github.com/pytest-dev/pytest-xdist
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 BuildRequires:	python-setuptools_scm
-%if %{with tests_py2}
+%if %{with tests}
 BuildRequires:	python-execnet >= 1.1
 BuildRequires:	python-filelock
-BuildRequires:	python-pexpect >= 3
 BuildRequires:	python-py >= 1.4.22
-BuildRequires:	python-pytest >= 3.0.0
+BuildRequires:	python-pytest >= 3.6.0
 BuildRequires:	python-pytest-forked
 BuildRequires:	python-six
 BuildConflicts:	python-pytest-capturelog
@@ -38,9 +36,8 @@ BuildRequires:	python3-setuptools_scm
 %if %{with tests}
 BuildRequires:	python3-execnet >= 1.1
 BuildRequires:	python3-filelock
-BuildRequires:	python3-pexpect >= 3
 BuildRequires:	python3-py >= 1.4.22
-BuildRequires:	python3-pytest >= 3.0.0
+BuildRequires:	python3-pytest >= 3.6.0
 BuildRequires:	python3-pytest-forked
 BuildRequires:	python3-six
 BuildConflicts:	python-pytest-capturelog
@@ -81,7 +78,7 @@ trybów wykonywania testów, jak choćby zrównoleglenie.
 %if %{with python2}
 %py_build
 
-%if %{with tests_py2}
+%if %{with tests}
 PYTHONPATH=$(pwd) \
 %{__python} -m pytest testing
 %endif
