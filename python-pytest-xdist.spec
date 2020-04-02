@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
-%bcond_without	tests		# tests [sensitive to pytest warnings or other output changes]
+%bcond_with	tests		# tests [sensitive to pytest warnings or other output changes, ptys needed]
 
 Summary:	py.test distributed testing plugin
 Summary(pl.UTF-8):	Wtyczka py.test do testów rozproszonych
@@ -80,9 +80,8 @@ trybów wykonywania testów, jak choćby zrównoleglenie.
 
 %if %{with tests}
 # -p no:benchmark to avoid "PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks"
-# disable tests requiring ptys (and thus failing on builders)
 PYTHONPATH=$(pwd) \
-%{__python} -m pytest -p no:benchmark testing -k 'not test_keyboard_interrupt_dist and not test_fail_to_ok and not test_xfail_passes'
+%{__python} -m pytest -p no:benchmark testing
 %endif
 %endif
 
@@ -91,7 +90,7 @@ PYTHONPATH=$(pwd) \
 
 %if %{with tests}
 PYTHONPATH=$(pwd) \
-%{__python3} -m pytest -p no:benchmark testing -k 'not test_keyboard_interrupt_dist and not test_fail_to_ok and not test_xfail_passes'
+%{__python3} -m pytest -p no:benchmark testing
 %endif
 %endif
 
