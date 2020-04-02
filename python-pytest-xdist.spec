@@ -79,8 +79,10 @@ trybów wykonywania testów, jak choćby zrównoleglenie.
 %py_build
 
 %if %{with tests}
+# -p no:benchmark to avoid "PytestBenchmarkWarning: Benchmarks are automatically disabled because xdist plugin is active.Benchmarks"
+# disable tests requiring ptys (and thus failing on builders)
 PYTHONPATH=$(pwd) \
-%{__python} -m pytest testing
+%{__python} -m pytest -p no:benchmark testing -k 'not test_keyboard_interrupt_dist and not test_fail_to_ok and not test_xfail_passes'
 %endif
 %endif
 
@@ -89,7 +91,7 @@ PYTHONPATH=$(pwd) \
 
 %if %{with tests}
 PYTHONPATH=$(pwd) \
-%{__python3} -m pytest testing
+%{__python3} -m pytest -p no:benchmark testing -k 'not test_keyboard_interrupt_dist and not test_fail_to_ok and not test_xfail_passes'
 %endif
 %endif
 
