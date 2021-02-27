@@ -8,7 +8,7 @@ Summary:	py.test distributed testing plugin
 Summary(pl.UTF-8):	Wtyczka py.test do testów rozproszonych
 Name:		python-pytest-xdist
 Version:	1.27.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-xdist/
