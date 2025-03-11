@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Wtyczka py.test do testów rozproszonych
 Name:		python-pytest-xdist
 # keep 1.x here for python2 support
 Version:	1.34.0
-Release:	4
+Release:	5
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-xdist/
