@@ -6,13 +6,13 @@
 Summary:	py.test distributed testing plugin
 Summary(pl.UTF-8):	Wtyczka py.test do testów rozproszonych
 Name:		python3-pytest-xdist
-Version:	3.7.0
+Version:	3.8.0
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-xdist/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytest-xdist/pytest_xdist-%{version}.tar.gz
-# Source0-md5:	94bf52c692963572d85150770b6d234c
+# Source0-md5:	9ead4effcd1eba423610acd10d725aad
 URL:		https://github.com/pytest-dev/pytest-xdist
 BuildRequires:	python3-build
 BuildRequires:	python3-installer
@@ -22,6 +22,7 @@ BuildRequires:	python3-setuptools_scm >= 6.2.3
 %if %{with tests}
 BuildRequires:	python3-execnet >= 2.1
 BuildRequires:	python3-filelock
+BuildRequires:	python3-psutil >= 3.0
 BuildRequires:	python3-pytest >= 7.0.0
 %endif
 BuildRequires:	rpm-pythonprov
